@@ -79,13 +79,13 @@ int main(int argc, char* const* argv)
             for (size_t i = 0; i < min_v.size(); ++i)
             {
                 // Display minimum values and locations
-                cv::circle(frame, min_loc[i], 5, cv::Scalar(255, 0, 0), -1);
+                cv::circle(frame, min_loc[i], 25, cv::Scalar(255, 0, 0), -1);
                 cv::putText(frame, "Min: " + std::to_string(min_v[i]),
                             min_loc[i] + cv::Point(5, 5), cv::FONT_HERSHEY_SIMPLEX, 0.5,
                             cv::Scalar(255, 0, 0), 1);
 
                 // Display maximum values and locations
-                cv::circle(frame, max_loc[i], 5, cv::Scalar(0, 255, 0), -1);
+                cv::circle(frame, max_loc[i], 25, cv::Scalar(0, 255, 0), -1);
                 cv::putText(frame, "Max: " + std::to_string(max_v[i]),
                             max_loc[i] + cv::Point(5, 20), cv::FONT_HERSHEY_SIMPLEX, 0.5,
                             cv::Scalar(0, 255, 0), 1);
