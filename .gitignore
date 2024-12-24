@@ -1,4 +1,5 @@
 build/
 .vscode
 i92esper/
+.DS_Store
 *.zip
