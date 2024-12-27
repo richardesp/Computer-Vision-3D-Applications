@@ -82,7 +82,6 @@ void fsiv_compute_gradient_histogram(cv::Mat const &gradient, int n_bins, cv::Ma
                 bin_idx = std::min(bin_idx, n_bins - 1);
             }
 
-            
             hist.at<float>(bin_idx) += 1.0f;
         }
     }
@@ -165,8 +164,9 @@ void fsiv_percentile_edge_detector(cv::Mat const &gradient, cv::Mat &edges,
     // {0.0, ..., max_grad}
     // Hint: use "operator >=" to threshold the gradient magnitude image.
 
-        cv::Mat hist;
+    cv::Mat hist;
     float max_gradient = 0.0f;
+
     fsiv_compute_gradient_histogram(gradient, n_bins, hist, max_gradient);
 
     int threshold_idx = fsiv_compute_histogram_percentile(hist, th);
@@ -193,7 +193,7 @@ void fsiv_otsu_edge_detector(cv::Mat const &gradient, cv::Mat &edges)
 
     cv::Mat normalized_gradient;
     double min_val, max_val;
-    cv::minMaxLoc(gradient, &min_val, &max_val); // Find the min and max values
+    cv::minMaxLoc(gradient, &min_val, &max_val);                       // Find the min and max values
     gradient.convertTo(normalized_gradient, CV_8UC1, 255.0 / max_val); // Scale to [0, 255]
 
     double otsu_threshold = cv::threshold(normalized_gradient, edges, 0, 255, cv::THRESH_BINARY | cv::THRESH_OTSU);
@@ -281,7 +281,7 @@ void fsiv_compute_confusion_matrix(cv::Mat const &gt, cv::Mat const &pred, cv::M
         for (int x = 0; x < gt.cols; ++x)
         {
             // Determine ground truth and predicted labels
-            bool is_edge_gt = (gt.at<uchar>(y, x) != 0);   // Ground truth edge
+            bool is_edge_gt = (gt.at<uchar>(y, x) != 0);     // Ground truth edge
             bool is_edge_pred = (pred.at<uchar>(y, x) != 0); // Predicted edge
 
             // Update confusion matrix
@@ -295,7 +295,6 @@ void fsiv_compute_confusion_matrix(cv::Mat const &gt, cv::Mat const &pred, cv::M
                 cm.at<float>(1, 1) += 1.0f; // True Negative (TN)
         }
     }
-
 
     //
     CV_Assert(cm.type() == CV_32FC1);
@@ -322,7 +321,6 @@ float fsiv_compute_sensitivity(cv::Mat const &cm)
     {
         return 0.0f; // Sensitivity is undefined if no positive ground truths
     }
-
 }
 
 float fsiv_compute_precision(cv::Mat const &cm)
