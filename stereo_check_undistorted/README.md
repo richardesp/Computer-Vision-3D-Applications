@@ -7,6 +7,6 @@ mkdir build; cd build; cmake ..; make
 ``
 
 ``sh
-./stereo_checkundistorted ../stereo/calibration/m001.jpg ../../stereo_calibrate/build/out.yml
+./stereo_checkundistorted ../stereo/calibration/m001.jpg ../stereo/stereoparms.yml
 ``
 
